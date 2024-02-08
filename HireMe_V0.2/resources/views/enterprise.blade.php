@@ -1,1 +1,4 @@
-hello Enterprise
+@extends('layouts.mynav')
+@section('home')
+    
+@endsection

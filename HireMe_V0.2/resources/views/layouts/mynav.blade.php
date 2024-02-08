@@ -26,8 +26,20 @@
 			<ul class="flex font-semibold justify-between">
 				<li class="md:px-4 md:py-2 text-indigo-500"><a href="/">Home</a></li>
 				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Job Offers</a></li>
+				@auth
+				@if (auth()->user()->role == 'Enterprise')
+				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{route('enterprise.profile')}}">Profile</a></li>
+				@endif
+				<li class="md:px-4 md:py-2 hover:text-indigo-400">
+					<form action="{{route('logout')}}" method="POST">
+						@csrf
+					<input type="submit" value="Logout">
+					</form>
+				</li>
+				@else
 				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{route('login')}}">Login</a></li>
 				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{route('register')}}">Register</a></li>
+				@endauth
 			</ul>
 		</div>
 	</div>

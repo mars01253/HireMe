@@ -1,1 +1,4 @@
-hello admin
+@extends('layouts.mynav')
+@section('home')
+    
+@endsection
