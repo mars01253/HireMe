@@ -13,8 +13,12 @@ class HomeController extends Controller
             $role = auth()->user()->role;
             if($role=='ADMIN'){
                 return view('admin');
-            }elseif($role=='ADMIN'){
-                return view('welcome');
+            }elseif($role=='Candidate'){
+                return view('candidate');
+            }elseif ($role=='Enterprise') {
+                return view('enterprise');
+            }else {
+                return view('welecome');
             }
         }
     }
