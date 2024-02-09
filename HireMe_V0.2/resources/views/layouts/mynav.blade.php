@@ -12,9 +12,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
     <title>HireMe</title>
 </head>
-<body>
+<body class="bg-[#eeeeee]">
     <!-- component -->
-<nav class="bg-gray-200 shadow shadow-gray-300 w-100 px-8 md:px-auto">
+<nav class="bg-[#eeeeee] shadow shadow-gray-300 w-100 px-8 md:px-auto">
 	<div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
 		<!-- Logo -->
 		<div class="text-indigo-500 md:order-1">
@@ -26,7 +26,7 @@
 			</svg>
 		</div>
 		<div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
-			<ul class="flex font-semibold justify-between">
+			<ul class="flex font-semibold justify-between items-center">
 				<li class="md:px-4 md:py-2 text-indigo-500"><a href="/home">Home</a></li>
 				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Job Offers</a></li>
 				@auth
@@ -36,7 +36,7 @@
 				<li class="md:px-4 md:py-2 hover:text-indigo-400">
 					<form action="{{route('logout')}}" method="POST">
 						@csrf
-					<input type="submit" value="Logout">
+					<input type="submit" class="p-2 text-white bg-[#3465f8] rounded-lg hover:text-black" value="Logout">
 					</form>
 				</li>
 				@else
