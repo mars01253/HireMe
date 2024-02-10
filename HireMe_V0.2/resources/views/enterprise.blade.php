@@ -50,7 +50,7 @@
     </div>
     <div class="flex flex-col"> 
         <label for="Contract" class="font-bold">Contract</label>
-        <select name="Contract" id="Contract" class="py-2 rounded-lg appearance-none">
+        <select name="Contract" id="Contract" class="py-2 rounded-lg appearance-none form-control">
             <option selected disabled hidden>Choose Contract type:</option>
             <option value="Remote">Remote</option>
             <option value="Hybrid">Hybrid</option>
