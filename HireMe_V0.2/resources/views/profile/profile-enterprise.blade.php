@@ -14,7 +14,7 @@
         <div class="flex flex-col"> 
             <label for="slogan" class="font-bold">Slogan</label>
         <input type="text" id="slogan" name="slogan" value="{{old('slogan')}}" class="border-none py-1 px-8 rounded-xl" >
-        <input type="text"  name="id" value="{{auth()->user()->id}}" class="border-none py-1 px-8 rounded-xl hidden" >
+        <input type="text"  name="user_id" value="{{auth()->user()->id}}" class="border-none py-1 px-8 rounded-xl hidden" >
         <input type="text"  name="name" value="{{auth()->user()->name}}" class="border-none py-1 px-8 rounded-xl hidden" >
         <input type="text"  name="email" value="{{auth()->user()->email}}" class="border-none py-1 px-8 rounded-xl hidden" >
         @error('slogan')

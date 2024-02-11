@@ -12,12 +12,15 @@ class CandidateController extends Controller
     public function index(){
         $id = auth()->user()->id;
         $data = Candidate::findOrFail($id);
-        return view('candidate' , ['data'=>$data]);
+        if($data){
+            return view('candidate' , ['data'=>$data]);
+        }
+        return view('candidate');
     }
     public function store(Request $request)
     {
         $formfields = $request->validate([
-            'id' => ['required'],
+            'user_id'=> ['required'],
             'email' => ['required'],
             'name' => ['required'],
             'photo' => ['required'],
@@ -27,11 +30,9 @@ class CandidateController extends Controller
             'address' => ['required', 'string'] , 
             'about' => ['required', 'string'] , 
         ]);
-        // $candidate = Candidate::create($formfields);
-        // $update = new EnterpriseController() ; 
-        // $update->update_token();
-        
-        
+        $candidate = Candidate::create($formfields);
+        $update = new EnterpriseController() ; 
+        $update->update_token();
         return to_route('profile.candidate');
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('industry');
             $table->string('address');
             $table->string('about');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

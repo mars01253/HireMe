@@ -9,7 +9,7 @@ class Enterprise extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
+        'user_id',
         'name',
         'email',
         'logo',
@@ -20,4 +20,8 @@ class Enterprise extends Model
     public function offer(){
         return $this->hasMany(Offer::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    
 }

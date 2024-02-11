@@ -18,7 +18,7 @@ class EnterpriseController extends Controller
     }
     public function store(Request $request){
         $formfields = $request->validate([
-            'id'=>['required'] , 
+            'user_id'=>['required'] , 
             'email'=>['required'] ,
             'name'=>['required'] ,
             'logo'=>['required'],

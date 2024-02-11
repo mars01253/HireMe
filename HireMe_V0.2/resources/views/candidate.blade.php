@@ -49,11 +49,9 @@
                 </div>
             </div>
         </div>
-@if (Ca)
-    
-@endif
+
         <div class="p-8 rounded border border-gray-200">
-            <h1 class="font-medium text-3xl">Add User</h1>
+            <h1 class="font-medium text-3xl">Add Your CV</h1>
             <p class="text-gray-600 mt-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos dolorem vel
                 cupiditate laudantium dicta.</p>
             <form>
@@ -62,22 +60,58 @@
                             type="text" name="name" id="name"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                             placeholder="Enter your name" /> </div>
+                    <input type="text" value="{{ auth()->user()->id }}" name="candidate_id" class="hidden" />
                     <div> <label for="email" class="text-sm text-gray-700 block mb-1 font-medium">Email Adress</label>
                         <input type="text" name="email" id="email"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                            placeholder="yourmail@provider.com" /> </div>
+                            placeholder="yourmail@provider.com" />
+                    </div>
                     <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Job title</label>
                         <input type="text" name="job" id="job"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                            placeholder="(ex. developer)" /> </div>
+                            placeholder="(ex. developer)" />
+                    </div>
+                    <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Photo</label>
+                        <input type="file" name="photo" 
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            />
+                    </div>
                     <div> <label for="brithday" class="text-sm text-gray-700 block mb-1 font-medium">Birthday</label> <input
                             type="text" name="brithday" id="brithday"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                             placeholder="(01/01/1993)" /> </div>
                 </div>
+                <div class="text-2xl font-bold mt-2"><h1>Education</h1></div>
+                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Diploma</label>
+                    <input type="text" name="Diplome" id="job"
+                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                        placeholder="Bachelor" />
+                </div>
+                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">School</label>
+                    <input type="text" name="school" id="job"
+                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                        placeholder="Youcode" />
+                </div>
+                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Start date</label>
+                    <input type="date" name="start_date" id="job"
+                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                         />
+                </div>
+                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">End date</label>
+                    <input type="date" name="end_date" id="job"
+                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                        placeholder="Youcode" />
+                </div>
+                <div class="text-2xl font-bold mt-2"><h1>Experiences</h1></div>
+                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">End date</label>
+                    <input type="date" name="end_date" id="job"
+                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                        placeholder="Youcode" />
+                </div>
+
                 <div class="space-x-4 mt-8"> <button type="submit"
                         class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">Save</button>
-                    <!-- Secondary --> <button
+                     <button
                         class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Cancel</button>
                 </div>
             </form>
@@ -101,7 +135,7 @@
                 <div class="flex flex-col w-1/2">
                     <input type="file" id="photo" name="photo" value="{{ old('photo') }}"
                         class="border-none py-2 px-8 rounded-xl">
-                    <input type="text" name="id" value="{{ auth()->user()->id }}"
+                    <input type="text" name="user_id" value="{{ auth()->user()->id }}"
                         class="border-none py-1 px-8 rounded-xl hidden">
                     <input type="text" name="name" value="{{ auth()->user()->name }}"
                         class="border-none py-1 px-8 rounded-xl hidden">

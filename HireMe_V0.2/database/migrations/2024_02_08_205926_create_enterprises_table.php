@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slogan');
             $table->string('industrie');
             $table->string('description');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
         });
