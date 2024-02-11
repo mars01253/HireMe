@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('proficiency');
-            $table->foreignId('cv_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('offers-candidates', function (Blueprint $table) {
+           $table->foreignId('candidate_id')->constrained()->onDelete('cascade');
+           $table->foreignId('offer_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('languages');
+        //
     }
 };

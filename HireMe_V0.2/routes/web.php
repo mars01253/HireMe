@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home'  , [HomeController::class , 'reroute']);
+Route::get('/home'  , [HomeController::class , 'reroute'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -40,6 +40,7 @@ Route::middleware( 'auth' , 'Enterprise')->group(function () {
 });
 
 Route::middleware( 'auth' , 'Candidate')->group(function () {
+    Route::get('profile/candidate/view' , [CandidateController::class , 'index'])->name('profile.candidate');
     Route::post('/profile/candidate' , [CandidateController::class , 'store'])->name('candidate.confirm');
 });
 
