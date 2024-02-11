@@ -23,19 +23,19 @@
 @endif
 <h1 class="text-xl font-bold">Add a New Job Offer : </h1>
 
-    <form action="{{route('enterprise.confirm')}}" method="POST" class="w-[50%] m-auto flex flex-col gap-2"  enctype="multipart/form-data">
+    <form action="{{route('offer.create')}}" method="POST" class="w-[50%] m-auto flex flex-col gap-2"  enctype="multipart/form-data">
         @csrf
         
         <div class="flex gap-1 ">
         <div class="flex flex-col w-1/2"> 
-        <input type="text" id="title" name="title" placeholder="title"  class="border-none py-2 px-8 rounded-xl" >
-        <input type="text"  name="id" value="{{auth()->user()->id}}" class="border-none py-1 px-8 rounded-xl hidden" >
+        <input type="text" id="title" name="title" placeholder="title" value="{{old('title')}}" class="border-none py-2 px-8 rounded-xl" >
+        <input type="text"  name="enterprise_id" value="{{auth()->user()->id}}" class="border-none py-1 px-8 rounded-xl hidden" >
         @error('title')
             <p class="text-red-500">{{$message}}</p>
         @enderror
        </div>
        <div class="flex flex-col w-1/2"> 
-        <input type="text" id="Skills" name="skills"  placeholder="please separate skills by commas"  class="border-none py-2 px-8 rounded-xl" >
+        <input type="text" id="Skills" name="skills" value="{{old('skills')}}" placeholder="please separate skills by commas"  class="border-none py-2 px-8 rounded-xl" >
         @error('Skills')
         <p class="text-red-500">{{$message}}</p>
         @enderror
@@ -43,14 +43,14 @@
 </div>
     <div class="flex flex-col"> 
         
-        <input type="text-area" id="description" name="description" placeholder="Description" class="border-none py-5 px-8 rounded-xl" >
+        <input type="text-area" id="description" name="description" value="{{old('description')}}" placeholder="Description" class="border-none py-5 px-8 rounded-xl" >
         @error('description')
         <p class="text-red-500">{{$message}}</p>
         @enderror
     </div>
     <div class="flex flex-col"> 
         <label for="Contract" class="font-bold">Contract</label>
-        <select name="Contract" id="Contract" class="py-2 rounded-lg appearance-none form-control">
+        <select name="Contract" id="Contract"  class="py-2 rounded-lg appearance-none form-control">
             <option selected disabled hidden>Choose Contract type:</option>
             <option value="Remote">Remote</option>
             <option value="Hybrid">Hybrid</option>
@@ -311,7 +311,7 @@
         <p class="text-red-500">{{$message}}</p>
         @enderror
     </div>
-        <input type="submit" class="p-2 bg-[#3465f8] font-medium rounded-lg" value="Confirm">
+        <input type="submit" class="p-2 bg-[#3465f8] font-medium rounded-lg" value="Add a Job Offer">
     </form>
 
 

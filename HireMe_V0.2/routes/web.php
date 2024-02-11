@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -35,6 +36,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware( 'auth' , 'Enterprise')->group(function () {
     Route::get('/profile/enterprise' , [EnterpriseController::class , 'index'])->name('profile.enterprise');
     Route::post('/profile/enterprise/confirm' , [EnterpriseController::class , 'store' ])->name('enterprise.confirm');
+    Route::post('/enterprise/offer/create' , [EnterpriseController::class , 'storeOffer' ])->name('offer.create');
+});
+
+Route::middleware( 'auth' , 'Candidate')->group(function () {
+    Route::post('/profile/candidate' , [CandidateController::class , 'store'])->name('candidate.confirm');
 });
 
 

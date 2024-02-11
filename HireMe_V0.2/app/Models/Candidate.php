@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enterprise extends Model
+class Candidate extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id',
         'name',
         'email',
-        'logo',
-        'slogan',
-        'industrie',
-        'description',
+        'photo',
+        'titre',
+        'current_position',
+        'industry',
+        'address',
+        'about'
     ];
-    public function offer(){
-        return $this->hasMany(Offer::class);
-    }
 }

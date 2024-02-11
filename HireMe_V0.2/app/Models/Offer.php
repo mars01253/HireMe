@@ -16,4 +16,7 @@ class Offer extends Model
         'Contract',
         'Location'
     ];
+    public function enterprise(){
+        return $this->belongsTo(Enterprise::class);
+    }
 }
