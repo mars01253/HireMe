@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,9 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('profile/candidate/view' , [CandidateController::class , 'index'])->name('profile.candidate');
     Route::post('/profile/candidate' , [CandidateController::class , 'store'])->name('candidate.confirm');
     Route::post('/profile/candidate/cv' , [CandidateController::class , 'storeCv'])->name('cv.add');
+    Route::get('candidate/cv/view' , [CvController::class , 'index'])->name('view.cv');
+    Route::get('candidate/cv/download' , [CvController::class , 'downloadCv'])->name('download.cv');
+
 });
 
 

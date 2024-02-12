@@ -50,21 +50,21 @@
             </div>
         </div>
 
-        @if (auth()->user()->hasCv==0)
-            
-        <div class="p-8 rounded border border-gray-200">
-            <h1 class="font-medium text-3xl">Add Your CV</h1>
-            <p class="text-gray-600 mt-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos dolorem vel
-                cupiditate laudantium dicta.</p>
-            <form enctype="multipart/form-data" method="POST" action="{{route('cv.add')}}">
-                @csrf
+        @if (auth()->user()->hasCv == 0)
+            <div class="p-8 rounded border border-gray-200">
+                <h1 class="font-medium text-3xl">Add Your CV</h1>
+                <p class="text-gray-600 mt-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos dolorem
+                    vel
+                    cupiditate laudantium dicta.</p>
+                <form enctype="multipart/form-data" method="POST" action="{{ route('cv.add') }}">
+                    @csrf
                     <div> <label for="name" class="text-sm text-gray-700 block mb-1 font-medium">Name</label> <input
                             type="text" name="name" id="name"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
                             placeholder="Enter your name" /> </div>
-                            @error('name')
-                            <p class="text-red-500">{{$message}}</p>
-                            @enderror
+                    @error('name')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
                     <input type="text" value="{{ auth()->user()->id }}" name="candidate_id" class="hidden" />
                     <div> <label for="email" class="text-sm text-gray-700 block mb-1 font-medium">Email Adress</label>
                         <input type="text" name="email" id="email"
@@ -72,15 +72,14 @@
                             placeholder="yourmail@provider.com" />
                     </div>
                     @error('email')
-                    <p class="text-red-500">{{$message}}</p>
+                        <p class="text-red-500">{{ $message }}</p>
                     @enderror
                     <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Photo</label>
-                        <input type="file" name="photo" 
-                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3  focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                            />
+                        <input type="file" name="photo"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3  focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" />
                     </div>
                     @error('photo')
-                    <p class="text-red-500">{{$message}}</p>
+                        <p class="text-red-500">{{ $message }}</p>
                     @enderror
                     <div> <label for="skills" class="text-sm text-gray-700 block mb-1 font-medium">Skills</label>
                         <input type="text" name="skills" id="skills"
@@ -88,100 +87,150 @@
                             placeholder="Design , please separate skills by commas" />
                     </div>
 
-                <div class="text-2xl font-bold mt-2"><h1>Education</h1></div>
-                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Diploma</label>
-                    <input type="text" name="diplome" id="job"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Bachelor" />
-                </div>
-                @error('Diplome')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">School</label>
-                    <input type="text" name="school" id="job"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Youcode" />
-                </div>
-                @error('school')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Start date</label>
-                    <input type="date" name="start_date_school" id="job"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                         />
-                </div>
-                @error('start_date_school')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">End date</label>
-                    <input type="date" name="end_date_school" id="job"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Youcode" />
-                </div>
-                @error('end_date_school')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div class="text-2xl font-bold mt-2"><h1>Experiences</h1></div>
-                <div> <label for="poste" class="text-sm text-gray-700 block mb-1 font-medium">Poste :</label>
-                    <input type="text" name="poste" id="poste"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="developper" />
-                </div>
-                @error('poste')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="company" class="text-sm text-gray-700 block mb-1 font-medium">Company :</label>
-                    <input type="text" name="company" id="company"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Youcode" />
-                </div>
-                @error('company')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="start_date" class="text-sm text-gray-700 block mb-1 font-medium">Start date :</label>
-                    <input type="date" name="start_date_exp" id="start_date"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Youcode" />
-                </div>
-                @error('start_date_exp')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div> <label for="end_date" class="text-sm text-gray-700 block mb-1 font-medium">End date :</label>
-                    <input type="date" name="end_date_exp" id="end_date"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="Youcode" />
-                </div>
-                @error('end_date_exp')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
-                <div class="text-2xl font-bold mt-2"><h1>Languages</h1></div>
-                <div> <label for="name" class="text-sm text-gray-700 block mb-1 font-medium">name</label>
-                    <input type="text" name="langname" id="name"
-                        class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-                        placeholder="English" />
-                </div>
-                @error('langname')
-                <p class="text-red-500">{{$message}}</p>
-                @enderror
+                    <div class="text-2xl font-bold mt-2">
+                        <h1>Education</h1>
+                    </div>
+                    <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Diploma</label>
+                        <input type="text" name="diplome" id="job"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Bachelor" />
+                    </div>
+                    @error('Diplome')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">School</label>
+                        <input type="text" name="school" id="job"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Youcode" />
+                    </div>
+                    @error('school')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Start date</label>
+                        <input type="date" name="start_date_school" id="job"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" />
+                    </div>
+                    @error('start_date_school')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">End date</label>
+                        <input type="date" name="end_date_school" id="job"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Youcode" />
+                    </div>
+                    @error('end_date_school')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div class="text-2xl font-bold mt-2">
+                        <h1>Experiences</h1>
+                    </div>
+                    <div> <label for="poste" class="text-sm text-gray-700 block mb-1 font-medium">Poste :</label>
+                        <input type="text" name="poste" id="poste"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="developper" />
+                    </div>
+                    @error('poste')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="company" class="text-sm text-gray-700 block mb-1 font-medium">Company :</label>
+                        <input type="text" name="company" id="company"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Youcode" />
+                    </div>
+                    @error('company')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="start_date" class="text-sm text-gray-700 block mb-1 font-medium">Start date
+                            :</label>
+                        <input type="date" name="start_date_exp" id="start_date"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Youcode" />
+                    </div>
+                    @error('start_date_exp')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div> <label for="end_date" class="text-sm text-gray-700 block mb-1 font-medium">End date :</label>
+                        <input type="date" name="end_date_exp" id="end_date"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="Youcode" />
+                    </div>
+                    @error('end_date_exp')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                    <div class="text-2xl font-bold mt-2">
+                        <h1>Languages</h1>
+                    </div>
+                    <div> <label for="name" class="text-sm text-gray-700 block mb-1 font-medium">name</label>
+                        <input type="text" name="langname" id="name"
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            placeholder="English" />
+                    </div>
+                    @error('langname')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
 
-                <div> <label for="proficiency" class="text-sm text-gray-700 block mb-1 font-medium">proficiency</label>
-                <select  class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" id="proficiency"  name="proficiency">
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="C1">C1</option>
-                    <option value="C2">C2</option>
-                </select>
+                    <div> <label for="proficiency"
+                            class="text-sm text-gray-700 block mb-1 font-medium">proficiency</label>
+                        <select
+                            class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                            id="proficiency" name="proficiency">
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                        </select>
+                    </div>
+
+                    <div class="space-x-4 mt-8"> <button type="submit"
+                            class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">Save</button>
+                        <button
+                            class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <div
+                class="relative duration-500 [transform:rotate3d(20_,-10,_1,_60deg)]  hover:-rotate-0  group border border-sky-900 border-4  overflow-hidden rounded-2xl relative h-52 w-72 bg-sky-800 p-5 flex flex-col items-start gap-4">
+                <div class="text-gray-50">
+                    <span class="font-bold text-5xl">{{ auth()->user()->name }}</span>
+                </div>
+                
+              
+                <div class="flex gap-1 ">
+                <a href="{{route('download.cv')}}"
+                    class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">Dowload
+                    CV
+                    <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                        preserveAspectRatio="xMidYMid meet" height="100" class="w-6 h-6 fill-current">
+                        <path fill-rule="evenodd"
+                            d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z">
+                        </path>
+                    </svg>
+                </a>
+
+                <a target="blank" href="{{route('view.cv')}}"
+                    class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">View
+                    CV
+                    <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                        preserveAspectRatio="xMidYMid meet" height="100" class="w-6 h-6 fill-current">
+                        <path fill-rule="evenodd"
+                            d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z">
+                        </path>
+                    </svg>
+                </a>
             </div>
 
-                <div class="space-x-4 mt-8"> <button type="submit"
-                        class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50">Save</button>
-                     <button
-                        class="py-2 px-4 bg-white border border-gray-200 text-gray-600 rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">Cancel</button>
-                </div>
-            </form>
-        </div>
+                {{-- <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"
+                    class="group-hover:scale-125 duration-200 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2  fill-gray-50 stroke-sky-700">
+                    <path stroke-width="2" stroke-miterlimit="10"
+                        d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z"
+                        data-name="layer1"></path>
+                </svg> --}}
+
+
+            </div>
         @endif
     @else
         <div class="px-8 py-6 bg-yellow-400 text-white flex justify-between rounded">
