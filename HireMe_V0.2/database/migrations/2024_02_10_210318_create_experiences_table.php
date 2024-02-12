@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('poste');
             $table->string('company');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date_exp');
+            $table->date('end_date_exp');
             $table->foreignId('cv_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

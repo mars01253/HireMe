@@ -12,6 +12,7 @@ class Cv extends Model
         'name',
         'email',
         'photo',
+        'skills',
         'candidate_id',
     ];
 

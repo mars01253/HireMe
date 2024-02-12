@@ -11,8 +11,8 @@ class Cursus extends Model
     protected $fillable = [
         'diplome',
         'school',
-        'start_date',
-        'end_date',
+        'start_date_school',
+        'end_date_school',
         'cv_id',
     ];
     public function cv(){

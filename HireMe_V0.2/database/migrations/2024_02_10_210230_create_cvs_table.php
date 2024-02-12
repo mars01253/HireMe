@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('photo');
+            $table->string('skills');
             $table->foreignId('candidate_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

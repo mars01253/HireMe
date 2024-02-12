@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Models\Cursus;
+use App\Models\Cv;
+use App\Models\Experience;
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
-
     public function index(){
         $id = auth()->user()->id;
         $data = Candidate::findOrFail($id);
@@ -16,6 +19,10 @@ class CandidateController extends Controller
             return view('candidate' , ['data'=>$data]);
         }
         return view('candidate');
+    }
+    public function update_Cv_token(){
+        $id = auth()->user()->id;
+        User::where('id', $id)->update(['hasCv' => 1]);
     }
     public function store(Request $request)
     {
@@ -34,5 +41,53 @@ class CandidateController extends Controller
         $update = new EnterpriseController() ; 
         $update->update_token();
         return to_route('profile.candidate');
+    }
+    
+    public function storeCv(Request $request)
+    {
+
+
+    $userId = auth()->id();
+    $cv = Cv::create([
+        'name' =>auth()->user()->name ,
+        'email' => auth()->user()->email ,
+        'photo' =>$request->photo ,
+        'skills' => $request->input('skills'),
+        'candidate_id' => $userId]);
+
+    // $languages = $request->input('languages');
+    // foreach ($languages as $language) {
+    Language::create([
+        'name' => $request->input('langname'),
+        'proficiency' => $request->input('proficiency'),
+        'cv_id' => $cv->id,
+    ]);
+    // }
+
+    //  Experience
+    // $experiences = $request->input('experiences');
+    // foreach ($experiences as $experience) {
+    Experience::create([
+        'poste' => $request->input('poste'),
+        'company' => $request->input('company'),
+        'start_date_exp' => $request->input('start_date_exp'),
+        'end_date_exp' => $request->input('end_date_exp'),
+        'cv_id' => $cv->id,
+    ]);
+    // }
+
+    //  Cursus
+    // $cursuses = $request->input('cursuses');
+    // foreach ($cursuses as $cursus) {
+    Cursus::create([
+        'diplome' => $request->input('diplome'),
+        'school' => $request->input('school'),
+        'start_date_school' => $request->input('start_date_school'),
+        'end_date_school' => $request->input('end_date_school'),
+        'cv_id' => $cv->id,
+    ]);
+    // }
+       $this->update_Cv_token();
+       $this->index();
     }
 }

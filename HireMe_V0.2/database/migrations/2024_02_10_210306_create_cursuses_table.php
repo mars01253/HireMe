@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('diplome');
             $table->string('school');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date_school');
+            $table->date('end_date_school');
             $table->foreignId('cv_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

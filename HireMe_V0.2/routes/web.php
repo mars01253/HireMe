@@ -42,6 +42,7 @@ Route::middleware( 'auth' , 'Enterprise')->group(function () {
 Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('profile/candidate/view' , [CandidateController::class , 'index'])->name('profile.candidate');
     Route::post('/profile/candidate' , [CandidateController::class , 'store'])->name('candidate.confirm');
+    Route::post('/profile/candidate/cv' , [CandidateController::class , 'storeCv'])->name('cv.add');
 });
 
 
