@@ -21,8 +21,12 @@ class EnterpriseController extends Controller
         $id = auth()->user()->id;
         $ent = Enterprise::where('user_id' , $id )->firstOrFail();
         $ent_id = $ent->id;
-        $offers = Offer::where('enterprise_id' , $ent_id)->firstOrFail();
-        return view('/enterprise' , ['offers'=>$offers]);
+        $offers = Offer::where('enterprise_id' , $ent_id)->get();
+        if($offers){
+            return view('/enterprise' , ['offers'=>$offers]);
+        }else{
+            return view('/enterprise');
+        }
     }
     public function store(Request $request){
         $formfields = $request->validate([

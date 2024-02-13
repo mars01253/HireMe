@@ -308,11 +308,12 @@
             </div>
             <input type="submit" class="p-2 bg-[#3465f8] font-medium rounded-lg" value="Add a Job Offer">
         </form>
-    @php
+    {{-- @php
         $title = strval($offers->title);
         $description = strval($offers->description);
+        $id = (int)$offers->id;
       
-    @endphp
+    @endphp --}}
 
     <div class="flex w-full m-auto font-bold text-2xl justify-center mt-5"><h1>Your Job Offers :</h1></div>
 <div class=" w-full flex flex-wrap gap-2 m-auto mt-5 mb-2 justify-center">
@@ -333,16 +334,18 @@
             class="absolute blur duration-500 group-hover:blur-none w-24 h-24 bg-sky-700 rounded-full group-hover:-translate-x-12">
         </div>
         <div class="z-10 flex flex-col justify-evenly w-full h-full">
-            <span class="text-2xl font-bold"><h1>{{$title}}</h1></span>
+            <span class="text-2xl font-bold"><h1>{{$offer->title}}</h1></span>
             <p>
-                {{$description}}
+                {{$offer->description}}
             </p>
             <a href="" class="hover:bg-blue-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-2">
                 See Candidates
             </a>
-            <a href="" class="hover:bg-red-500 bg-red-50 rounded text-neutral-800 font-extrabold w-full p-2">
-                Delete 
-            </a>
+            <form action="{{route('offer.delete', [$offer->id])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Delete" class="hover:bg-red-500 bg-red-50 rounded text-neutral-800 font-extrabold w-full p-2">
+            </form>
         </div>
     </div>
 @endforeach

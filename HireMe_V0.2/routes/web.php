@@ -4,6 +4,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::middleware( 'auth' , 'Enterprise')->group(function () {
     Route::get('/enterprise/home' , [EnterpriseController::class , 'return_to_view'])->name('enterprise.home');
     Route::post('/profile/enterprise/confirm' , [EnterpriseController::class , 'store' ])->name('enterprise.confirm');
     Route::post('/enterprise/offer/create' , [EnterpriseController::class , 'storeOffer' ])->name('offer.create');
+    Route::delete('/offer/delete/{id}' , [OfferController::class , 'destroy'])->name('offer.delete');
 });
 
 Route::middleware( 'auth' , 'Candidate')->group(function () {
