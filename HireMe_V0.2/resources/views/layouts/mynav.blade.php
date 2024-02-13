@@ -33,7 +33,7 @@
 					@auth
                     @if (auth()->user()->role == 'Candidate')
                         <li class="md:px-4 md:py-2 text-indigo-500"><a href="{{route('profile.candidate')}}">Profile</a></li>
-						<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Job Offers</a></li>
+						<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{route('job.offers')}}">Job Offers</a></li>
                     @endif
                         @if (auth()->user()->role == 'Enterprise')
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a

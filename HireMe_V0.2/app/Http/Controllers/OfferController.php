@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\Offer_Candidate;
 use Illuminate\Http\Request;
 
 class OfferController extends Controller
@@ -15,5 +16,13 @@ class OfferController extends Controller
            }else{
                return to_route('enterprise.home')->with('failed' , 'unable to delete the offer');
            }
+    }
+    public function ConsultCandidates($id){
+        $candidates = Offer_Candidate::where('offer_id' , $id)->get();
+        return view('canidates-offers' , ['candidates'=>$candidates]);
+    }
+    public function JobOffers(){
+        $offers = Offer::get();
+        return view('joboffers' , ['offers'=>$offers]);
     }
 }

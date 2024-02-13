@@ -338,7 +338,7 @@
             <p>
                 {{$offer->description}}
             </p>
-            <a href="" class="hover:bg-blue-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-2">
+            <a href="{{route('offer.candidates', [$offer->id])}}" class="hover:bg-blue-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-2">
                 See Candidates
             </a>
             <form action="{{route('offer.delete', [$offer->id])}}" method="POST">
