@@ -24,6 +24,6 @@ class CvController extends Controller
     }
     public function downloadCv(){
         $pdf = Pdf::loadView('cv');
-        return $pdf->download('cv.pdf');
+        return $pdf->download('cv.pdf');    
     }
 }
