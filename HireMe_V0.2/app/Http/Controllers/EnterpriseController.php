@@ -16,6 +16,14 @@ class EnterpriseController extends Controller
         $id = auth()->user()->id;
         User::where('id', $id)->update(['confirm' => 1]);
     }
+
+    public function return_to_view(){
+        $id = auth()->user()->id;
+        $ent = Enterprise::where('user_id' , $id )->firstOrFail();
+        $ent_id = $ent->id;
+        $offers = Offer::where('enterprise_id' , $ent_id)->firstOrFail();
+        return view('/enterprise' , ['offers'=>$offers]);
+    }
     public function store(Request $request){
         $formfields = $request->validate([
             'user_id'=>['required'] , 
@@ -31,15 +39,18 @@ class EnterpriseController extends Controller
         return redirect('/profile/enterprise');
     }
     public function storeOffer(Request $request){
-        $formfields = $request->validate([
-            'enterprise_id'=>['required'] , 
-            'title'=>['required' , 'string' ] ,
-            'skills'=>['required' , 'string'] ,
-            'description'=>['required', 'string'],
-            'Contract'=>['required' , 'string' , 'max:255'] , 
-            'Location'=>['required' , 'string' , 'max:255'] 
-        ]);
-        $Offer = Offer::create($formfields);
-        return to_route('profile.enterprise');
+        $id = auth()->user()->id;
+        $ent = Enterprise::where('user_id' , $id )->firstOrFail();
+        $ent_id = $ent->id;
+        $offer = Offer::create([
+            'enterprise_id' =>$ent_id ,
+            'title' => $request->title,
+            'skills' =>$request->skills ,
+            'description' => $request->input('description'),
+            'Contract' => $request->input('Contract'),
+            'Location'=>$request->input('Location')
+            ] );
+
+       return $this->return_to_view();
     }
 }

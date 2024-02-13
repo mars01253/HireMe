@@ -23,7 +23,14 @@ class CvController extends Controller
         return view('cv' , ['cv'=>$cv , 'experience'=>$experience , 'cursus'=>$cursus , 'language'=>$language , 'candidate'=>$candidate]);
     }
     public function downloadCv(){
-        $pdf = Pdf::loadView('cv');
+        $id = auth()->user()->id ;
+       
+        $cv = Cv::where( 'candidate_id' ,$id)->firstOrFail() ; 
+        $candidate = ModelsCandidate::where( 'user_id' ,$id)->firstOrFail() ; 
+        $experience = Experience::where( 'cv_id' ,$cv->id)->firstOrFail();
+        $cursus = Cursus::where( 'cv_id',$cv->id)->firstOrFail();
+        $language = Language::where('cv_id' , $cv->id )->firstOrFail();
+        $pdf = Pdf::loadView('cv' ,  ['cv'=>$cv , 'experience'=>$experience , 'cursus'=>$cursus , 'language'=>$language , 'candidate'=>$candidate]);
         return $pdf->download('cv.pdf');    
     }
 }

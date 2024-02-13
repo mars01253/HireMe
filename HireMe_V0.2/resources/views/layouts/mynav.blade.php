@@ -37,7 +37,7 @@
                     @endif
                         @if (auth()->user()->role == 'Enterprise')
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a
-                                    href="/home">Home</a></li>
+                                    href="{{route('enterprise.home')}}">Home</a></li>
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a
                                     href="{{ route('profile.enterprise') }}">Profile</a></li>
                         @endif

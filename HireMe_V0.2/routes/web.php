@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware( 'auth' , 'Enterprise')->group(function () {
     Route::get('/profile/enterprise' , [EnterpriseController::class , 'index'])->name('profile.enterprise');
+    Route::get('/enterprise/home' , [EnterpriseController::class , 'return_to_view'])->name('enterprise.home');
     Route::post('/profile/enterprise/confirm' , [EnterpriseController::class , 'store' ])->name('enterprise.confirm');
     Route::post('/enterprise/offer/create' , [EnterpriseController::class , 'storeOffer' ])->name('offer.create');
 });
