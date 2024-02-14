@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('offers_candidates', function (Blueprint $table) {
            $table->foreignId('candidate_id')->constrained()->onDelete('cascade');
            $table->foreignId('offer_id')->constrained()->onDelete('cascade');
+           $table->timestamps();
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use App\Models\Offer;
 use App\Models\Offer_Candidate;
 use Illuminate\Http\Request;
@@ -18,10 +19,15 @@ class OfferController extends Controller
            }
     }
     public function checkOffer($id){
-        $check = Offer_Candidate::where('offer_id' , $id)->first();
-        $alreadyApplied = $check->candidate_id; 
-        if($alreadyApplied){
-            return true ; 
+        $id = (int)$id;
+        $check = Offer_Candidate::where('offer_id' , $id)->first(); 
+        if($check){
+            $alreadyApplied = $check->candidate_id; 
+            if($alreadyApplied){
+                return true ; 
+            }else{
+                return false ;
+            }
         }else{
             return false ;
         }
@@ -38,18 +44,22 @@ class OfferController extends Controller
         $offer = Offer::where( 'id', $id)->get();
         $result =  $this->checkOffer($id);
         if($result){
-            return view('joboffer' , ['offer'=>$offer , 'exist'=>true]);
+            $notexist =  1 ;
+            return view('joboffer' , ['offer'=>$offer , 'notexist'=>$notexist]);
         }else{
-            return view('joboffer' , ['offer'=>$offer , 'exist'=>false]);
+            $notexist = 0 ; 
+            return view('joboffer' , ['offer'=>$offer , 'notexist'=>$notexist]);
         }
     }
 
     public function StoreApplication(Request $request){
-        $candidate_id = auth()->user()->id ;
+        $id = auth()->user()->id ;
+        $candidate = Candidate::where('user_id', $id)->firstOrFail();
         $offer_id = $request->id ;
         Offer_Candidate::create([
-                'candidate_id' => $candidate_id ,
-                'offer_id' => $offer_id ]);
+                'candidate_id' => $candidate->id ,
+                'offer_id' => $offer_id ,
+            ]);
         return to_route('job.offers')->with('applied' , 'you have applied succesfully');
     }
 }
