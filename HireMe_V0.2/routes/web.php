@@ -52,7 +52,7 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('candidate/cv/view' , [CvController::class , 'index'])->name('cv');
     Route::get('candidate/cv/download' , [CvController::class , 'downloadCv'])->name('download.cv');
     Route::get('candidate/jobOffers' , [OfferController::class , 'JobOffers'])->name('job.offers');
-
+    Route::get('candidate/jobOffer/{id}' , [OfferController::class , 'JobOffer'])->name('job.offer');
 });
 
 

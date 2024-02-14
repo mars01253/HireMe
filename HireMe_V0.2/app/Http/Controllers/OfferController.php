@@ -25,4 +25,8 @@ class OfferController extends Controller
         $offers = Offer::get();
         return view('joboffers' , ['offers'=>$offers]);
     }
+    public function JobOffer($id){
+        $offer = Offer::where( 'id', $id)->get();
+        return view('joboffer' , ['offer'=>$offer]);
+    }
 }
