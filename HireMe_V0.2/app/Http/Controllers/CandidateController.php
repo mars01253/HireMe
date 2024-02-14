@@ -46,12 +46,14 @@ class CandidateController extends Controller
     public function storeCv(Request $request)
     {
     $userId = auth()->user()->id;
+    $candidate = Candidate::where('user_id' , $userId)->first();
+
     $cv = Cv::create([
-        'name' =>auth()->user()->name ,
-        'email' => auth()->user()->email ,
+        'name' =>$request->name ,
+        'email' => $request->email ,
         'photo' =>$request->photo ,
         'skills' => $request->input('skills'),
-        'candidate_id' => $userId]);
+        'candidate_id' => $candidate->id]);
 
     // $languages = $request->input('languages');
     // foreach ($languages as $language) {

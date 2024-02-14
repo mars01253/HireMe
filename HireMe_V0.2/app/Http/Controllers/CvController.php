@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Candidate;
 use App\Models\Candidate as ModelsCandidate;
 use App\Models\Cursus;
 use App\Models\Cv;
@@ -15,8 +16,8 @@ class CvController extends Controller
     public function index(){
         $id = auth()->user()->id ;
        
-        $cv = Cv::where( 'candidate_id' ,$id)->firstOrFail() ; 
         $candidate = ModelsCandidate::where( 'user_id' ,$id)->firstOrFail() ; 
+        $cv = Cv::where( 'candidate_id' ,$candidate->id)->firstOrFail() ; 
         $experience = Experience::where( 'cv_id' ,$cv->id)->firstOrFail();
         $cursus = Cursus::where( 'cv_id',$cv->id)->firstOrFail();
         $language = Language::where('cv_id' , $cv->id )->firstOrFail();
@@ -24,9 +25,8 @@ class CvController extends Controller
     }
     public function downloadCv(){
         $id = auth()->user()->id ;
-       
-        $cv = Cv::where( 'candidate_id' ,$id)->firstOrFail() ; 
-        $candidate = ModelsCandidate::where( 'user_id' ,$id)->firstOrFail() ; 
+        $candidate = ModelsCandidate::where('user_id',$id)->firstOrFail();
+        $cv = Cv::where( 'candidate_id' ,$candidate->id)->firstOrFail() ; 
         $experience = Experience::where( 'cv_id' ,$cv->id)->firstOrFail();
         $cursus = Cursus::where( 'cv_id',$cv->id)->firstOrFail();
         $language = Language::where('cv_id' , $cv->id )->firstOrFail();
