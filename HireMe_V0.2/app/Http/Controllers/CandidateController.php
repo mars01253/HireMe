@@ -14,7 +14,7 @@ class CandidateController extends Controller
 {
     public function index(){
         $id = auth()->user()->id;
-        $data = Candidate::findOrFail($id);
+        $data = Candidate::where('user_id' , $id)->first();
         if($data){
             return view('candidate' , ['data'=>$data]);
         }
@@ -45,9 +45,7 @@ class CandidateController extends Controller
     
     public function storeCv(Request $request)
     {
-
-
-    $userId = auth()->id();
+    $userId = auth()->user()->id;
     $cv = Cv::create([
         'name' =>auth()->user()->name ,
         'email' => auth()->user()->email ,

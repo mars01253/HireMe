@@ -19,7 +19,7 @@ class EnterpriseController extends Controller
 
     public function return_to_view(){
         $id = auth()->user()->id;
-        $ent = Enterprise::where('user_id' , $id )->firstOrFail();
+        $ent = Enterprise::where('user_id' , $id)->first();
         $ent_id = $ent->id;
         $offers = Offer::where('enterprise_id' , $ent_id)->get();
         if($offers){

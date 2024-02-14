@@ -47,9 +47,9 @@ class OfferController extends Controller
     public function StoreApplication(Request $request){
         $candidate_id = auth()->user()->id ;
         $offer_id = $request->id ;
-        $offer_candidate = Offer_Candidate::create([
+        Offer_Candidate::create([
                 'candidate_id' => $candidate_id ,
                 'offer_id' => $offer_id ]);
-                return to_route('job.offers')->with('applied' , 'you have applied succesfully');
+        return to_route('job.offers')->with('applied' , 'you have applied succesfully');
     }
 }
