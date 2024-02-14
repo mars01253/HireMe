@@ -17,6 +17,15 @@ class OfferController extends Controller
                return to_route('enterprise.home')->with('failed' , 'unable to delete the offer');
            }
     }
+    public function checkOffer($id){
+        $check = Offer_Candidate::where('offer_id' , $id)->get();
+        $alreadyApplied = $check->candidate_id; 
+        if($alreadyApplied){
+            return true ; 
+        }else{
+            return false ;
+        }
+    }
     public function ConsultCandidates($id){
         $candidates = Offer_Candidate::where('offer_id' , $id)->get();
         return view('canidates-offers' , ['candidates'=>$candidates]);
@@ -27,6 +36,20 @@ class OfferController extends Controller
     }
     public function JobOffer($id){
         $offer = Offer::where( 'id', $id)->get();
-        return view('joboffer' , ['offer'=>$offer]);
+        $result =  $this->checkOffer($id);
+        if($result){
+            return view('joboffer' , ['offer'=>$offer , 'exist'=>true]);
+        }else{
+            return view('joboffer' , ['offer'=>$offer , 'exist'=>false]);
+        }
+    }
+
+    public function StoreApplication(Request $request){
+        $candidate_id = auth()->user()->id ;
+        $offer_id = $request->id ;
+        $offer_candidate = Offer_Candidate::create([
+                'candidate_id' => $candidate_id ,
+                'offer_id' => $offer_id ]);
+                return to_route('job.offers')->with('applied' , 'you have applied succesfully');
     }
 }
