@@ -308,12 +308,7 @@
             </div>
             <input type="submit" class="p-2 bg-[#3465f8] font-medium rounded-lg" value="Add a Job Offer">
         </form>
-    {{-- @php
-        $title = strval($offers->title);
-        $description = strval($offers->description);
-        $id = (int)$offers->id;
-      
-    @endphp --}}
+
 
     <div class="flex w-full m-auto font-bold text-2xl justify-center mt-5"><h1>Your Job Offers :</h1></div>
 <div class=" w-full flex flex-wrap gap-2 m-auto mt-5 mb-2 justify-center">

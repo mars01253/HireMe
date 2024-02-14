@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class EnterpriseController extends Controller
 {
     public function index(){
-        return view('profile/profile-enterprise');
+        $enterprise = Enterprise::where('user_id' , auth()->user()->id)->get();
+        return view('profile/profile-enterprise' , ['enterprise'=>$enterprise]);
     }
     public function update_token(){
         $id = auth()->user()->id;
@@ -29,7 +30,7 @@ class EnterpriseController extends Controller
         }
     }
     public function store(Request $request){
-        $formfields = $request->validate([
+     $request->validate([
             'user_id'=>['required'] , 
             'email'=>['required'] ,
             'name'=>['required'] ,
@@ -38,7 +39,17 @@ class EnterpriseController extends Controller
             'industrie'=>['required' , 'string' , 'max:255'] ,
             'description' =>['required' , 'string']
         ]);
-        $enterprise = Enterprise::create($formfields);
+        $logo =time().'.'.$request->logo->extension(); 
+        $request->logo->move(public_path('images'), $logo);
+        $enterprise = Enterprise::create([
+            'user_id'=>$request->user_id , 
+            'email'=>$request->email ,
+            'name'=>$request->name ,
+            'logo'=>$logo,
+            'slogan'=>$request->slogan, 
+            'industrie'=>$request->industrie ,
+            'description' =>$request->description
+        ]);
         $this->update_token();
         return redirect('/profile/enterprise');
     }

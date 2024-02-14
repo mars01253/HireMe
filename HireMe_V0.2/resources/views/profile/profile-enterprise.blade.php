@@ -38,6 +38,40 @@
         <input type="submit" class="p-2 bg-yellow-400 font-medium rounded-lg" value="Confirm">
     </form>
 </div>
+@else
+@foreach ($enterprise as $enterprises)
+    
+<div class="container mx-auto px-4">
+    <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+        <div class="flex w-full items-center justify-center mt-3 gap-x-6">
+            <img class="object-cover w-40 h-40 rounded-full" src="{{asset('images/'.$enterprises->logo)}}" alt="...">
+        </div>
+            <div class="text-center mt-12">
+                <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                    {{$enterprises->name}}
+                </h3>
+                <div class="mb-2 text-blueGray-600 mt-10">
+                    <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>{{ $enterprises->slogan }}
+                </div>
+                <div class="mb-2 text-blueGray-600">
+                    <i class="fas fa-university mr-2 text-lg text-blueGray-400 ml-2"></i>
+                    {{ $enterprises->industrie }}
+                </div>
+            </div>
+            <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div class="flex flex-wrap justify-center">
+                    <div class="w-full lg:w-9/12 px-4">
+                        <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                            {{ $enterprises->description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 @endif
 
   
