@@ -34,7 +34,7 @@ class OfferController extends Controller
     }
     public function ConsultCandidates($id){
         $candidates = Offer_Candidate::where('offer_id' , $id)->get();
-        return view('canidates-offers' , ['candidates'=>$candidates]);
+        return view('candidates-offers' , ['candidates'=>$candidates]);
     }
     public function JobOffers(){
         $offers = Offer::get();

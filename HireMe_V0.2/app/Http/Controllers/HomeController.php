@@ -16,7 +16,7 @@ class HomeController extends Controller
             }elseif($role=='Candidate'){
                 return to_route('profile.candidate');
             }elseif ($role=='Enterprise') {
-                return view('enterprise');
+                return to_route('profile.enterprise');
             }else {
                 return view('welecome');
             }
