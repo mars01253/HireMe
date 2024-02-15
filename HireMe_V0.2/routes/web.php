@@ -6,6 +6,7 @@ use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Cv;
 use App\Models\Offer;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,7 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('profile/candidate/view' , [CandidateController::class , 'index'])->name('profile.candidate');
     Route::post('/profile/candidate' , [CandidateController::class , 'store'])->name('candidate.confirm');
     Route::post('/profile/candidate/cv' , [CandidateController::class , 'storeCv'])->name('cv.add');
+    Route::delete('/profile/delete/cv' , [CandidateController::class , 'DeleteCv'])->name('cv.delete');
     Route::get('candidate/cv/view' , [CvController::class , 'index'])->name('cv');
     Route::get('candidate/cv/download' , [CvController::class , 'downloadCv'])->name('download.cv');
     Route::get('candidate/jobOffers' , [OfferController::class , 'JobOffers'])->name('job.offers');

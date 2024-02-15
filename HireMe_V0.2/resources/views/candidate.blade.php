@@ -1,7 +1,8 @@
 @extends('layouts.mynav')
 @section('home')
     @if (auth()->user()->confirm == 1)
-        <div class="px-8 py-6 bg-green-400 text-white flex justify-between rounded">
+        <div class="px-8 py-6 bg-green-400 text-white flex justify-between rounded " x-data="{show : true}" x-init="setTimeout(()=> show = false , 3000)"
+            x-show="show">
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-6" viewBox="0 0 20 20" fill="currentColor">
                     <path
@@ -10,44 +11,42 @@
                 <p>Your Profile was registerd Succesfully</p>
             </div>
         </div>
-        <div class="container mx-auto px-4">
-            <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
-                <div class="px-6">
-                    <div class="flex flex-wrap justify-center">
-                        <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                            <div class="relative">
-                                <img alt="..."
-                                    src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
-                                    class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px">
+        <div class="container mx-auto px-4 mt-3">
+            @foreach ($data as $candidate)
+                <div class=" flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg ">
+                    <div class="px-6">
+                        <div class="flex w-full items-center justify-center mt-3 gap-x-6">
+                            <img class="object-cover w-40 h-40 rounded-full" src="{{ asset('images/' . $candidate->photo) }}"
+                                alt="...">
+                        </div>
+                        <div class="text-center mt-12">
+                            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                                {{ $candidate->name }}
+                            </h3>
+                            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                                <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                                {{ $candidate->address }}
+                            </div>
+                            <div class="mb-2 text-blueGray-600 mt-10">
+                                <i
+                                    class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>{{ $candidate->current_position }}
+                            </div>
+                            <div class="mb-2 text-blueGray-600">
+                                <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>{{ $candidate->industry }}
                             </div>
                         </div>
-                    </div>
-                    <div class="text-center mt-12">
-                        <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                            {{ $data->name }}
-                        </h3>
-                        <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                            <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                            {{ $data->address }}
-                        </div>
-                        <div class="mb-2 text-blueGray-600 mt-10">
-                            <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>{{ $data->current_position }}
-                        </div>
-                        <div class="mb-2 text-blueGray-600">
-                            <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>{{ $data->industry }}
-                        </div>
-                    </div>
-                    <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
-                        <div class="flex flex-wrap justify-center">
-                            <div class="w-full lg:w-9/12 px-4">
-                                <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
-                                    {{ $data->about }}
-                                </p>
+                        <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                            <div class="flex flex-wrap justify-center">
+                                <div class="w-full lg:w-9/12 px-4">
+                                    <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                                        {{ $candidate->about }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
         @if (auth()->user()->hasCv == 0)
@@ -75,7 +74,7 @@
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror
                     <div> <label for="job" class="text-sm text-gray-700 block mb-1 font-medium">Photo</label>
-                        <input type="file" name="photo"
+                        <input type="file" name="cvphoto"
                             class="bg-gray-100 border border-gray-200 rounded py-1 px-3  focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" />
                     </div>
                     @error('photo')
@@ -191,42 +190,46 @@
                 </form>
             </div>
         @else
-       
-            <div class="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-5 ml-5 mb-3">
-                <div class="reFlative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
-                </div>
-                <div class="p-6">
-                  <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                    {{ auth()->user()->name }}
-                  </h5>
-                  <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc felis ligula. 
-                  </p>
-                </div>
-                <div class="p-6 pt-0">
-                    <a href="{{route('download.cv')}}"
-                    class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">Dowload
-                    CV
-                    <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
-                        preserveAspectRatio="xMidYMid meet" height="100" class="w-6 h-6 fill-current">
-                        <path fill-rule="evenodd"
-                            d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z">
-                        </path>
-                    </svg>
-                </a>
+            @foreach ($data as $candidate)
+                <div
+                    class=" flex w-[90%] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md mt-5 m-auto mb-3">
+                    <div
+                        class="reFlative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
+                    </div>
+                    <div class="p-6">
+                        <h5
+                            class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                            {{ auth()->user()->name }}
+                        </h5>
+                        <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+                            {{ $candidate->titre }}
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a target="blank" href="{{ route('download.cv') }}"
+                            class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">Dowload
+                            CV
+                            <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
+                                preserveAspectRatio="xMidYMid meet" height="100" class="w-6 h-6 fill-current">
+                                <path fill-rule="evenodd"
+                                    d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z">
+                                </path>
+                            </svg>
+                        </a>
 
-                <a target="blank" href="{{route('cv')}}"
-                    class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">View
-                    CV
-                    <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid meet" height="100" class="w-6 h-6 fill-current">
-                    <path fill-rule="evenodd"
-                        d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z">
-                    </path>
-                    </svg>
-                </a>
+                        <a target="blank" href="{{ route('cv') }}"
+                            class="duration-300 hover:bg-sky-900 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3">View
+                            CV
+                        </a>
+                        <form action="{{route('cv.delete')}}" method="POST" class="w-full">
+                            @csrf
+                            @method('DELETE')
+                            <input type="text" name="cv_id" class="hidden" value="{{$cv->id}}">
+                            <button class="duration-300 hover:bg-red-600 border hover:text-gray-50 bg-gray-50 font-semibold text-sky-800 px-1 py-1 flex flex-row items-center gap-3 w-full">Delete</button>
+                        </form>
+                    </div>
                 </div>
-              </div>
+            @endforeach
         @endif
     @else
         <div class="px-8 py-6 bg-yellow-400 text-white flex justify-between rounded">

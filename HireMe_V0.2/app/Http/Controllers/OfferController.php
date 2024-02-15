@@ -20,7 +20,9 @@ class OfferController extends Controller
     }
     public function checkOffer($id){
         $id = (int)$id;
-        $check = Offer_Candidate::where('offer_id' , $id)->first(); 
+        $user = Candidate::where('user_id' , auth()->user()->id)->first();
+        $user_id = $user->id ;
+        $check = Offer_Candidate::where('offer_id' , $id)->where('candidate_id' , $user_id)->first(); 
         if($check){
             $alreadyApplied = $check->candidate_id; 
             if($alreadyApplied){

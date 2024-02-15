@@ -32,7 +32,9 @@
             <div class="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative" style="height: 24em;">
                 <div class="absolute left-0 bottom-0 w-full h-full z-10"
                     style="background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.7));"></div>
-                <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80"
+                    @foreach ($offer as $offers)
+                    <img src="{{ asset('images/' . $offers->enterprise->logo) }}"
+                    @endforeach
                     class="absolute left-0 top-0 w-full h-full z-0 object-cover" />
                 <div class="p-4 absolute bottom-0 left-0 z-20">
 
@@ -75,15 +77,27 @@
             </div>
         </main>
 
-        <div class="w-[80%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center">
+        
            
+            @if ( $notexist == 0)       
+            <div class="w-[80%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center">
             <form action="{{route('store.application')}}" method="POST">
                 @csrf
                 <input type="text" class="hidden" name="id" value="{{$offers->id}}">
                 <input class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-black hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200" type="submit" value="Apply Now">
             </form>
-         
         </div>
+        @else
+        <div class="w-[60%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center text-white font-bold"><h3>You have already applied to this offer</h3></div>
+            @endif
+            <div class="w-[80%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center">
+                <form action="{{route('store.application')}}" method="POST">
+                    @csrf
+                    <input type="text" class="hidden" name="id" value="{{auth()->user()->email}}">
+                    <input class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-black hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200" type="submit" value="Subscribe to our NewsLetter">
+                </form>
+            </div>
+        
 </body>
 
 </html>

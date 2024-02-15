@@ -180,7 +180,7 @@
                 <span class="separator"></span>
             </div>
 
-            <div class="about">
+            <div class="about flex flex-col">
                 <span class="position">{{$candidate->current_position}}</span>
                 <span class="desc">
                     {{$candidate->about}}
@@ -227,22 +227,7 @@
                                 {{$cv->skills}}
                             </div>
                         </div>
-                        <div class="right">
-                            <input id="ck1" type="checkbox" checked />
-
-                            <label for="ck1"></label>
-                            <input id="ck2" type="checkbox" checked />
-
-                            <label for="ck2"></label>
-                            <input id="ck3" type="checkbox" />
-
-                            <label for="ck3"></label>
-                            <input id="ck4" type="checkbox" />
-                            <label for="ck4"></label>
-                            <input id="ck5" type="checkbox" />
-                            <label for="ck5"></label>
-
-                        </div>
+                       
                     </div>
 
                 </div>
