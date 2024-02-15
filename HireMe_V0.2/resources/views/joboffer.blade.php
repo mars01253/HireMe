@@ -91,7 +91,7 @@
         <div class="w-[60%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center text-white font-bold"><h3>You have already applied to this offer</h3></div>
             @endif
             <div class="w-[80%] p-3 mt-5 rounded-lg bg-black mb-5 m-auto flex justify-center">
-                <form action="{{route('store.application')}}" method="POST">
+                <form action="{{route('subscribe')}}" method="POST">
                     @csrf
                     <input type="text" class="hidden" name="id" value="{{auth()->user()->email}}">
                     <input class="inline-block py-2 px-6 rounded-l-xl rounded-t-xl bg-black hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200" type="submit" value="Subscribe to our NewsLetter">

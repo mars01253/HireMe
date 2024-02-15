@@ -1,7 +1,8 @@
 @extends('layouts.mynav')
 @section('home')
     @if (auth()->user()->confirm == 1)
-        <div class="px-8 py-6 bg-green-400 text-white flex justify-between rounded">
+        <div class="px-8 py-6 bg-green-400 text-white flex justify-between rounded" x-data="{show : true}" x-init="setTimeout(()=> show = false , 3000)"
+            x-show="show">
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-6" viewBox="0 0 20 20" fill="currentColor">
                     <path
@@ -11,9 +12,9 @@
             </div>
         </div>
 
-        <h1 class="text-xl font-bold">Add a New Job Offer : </h1>
+        <h1 class="text-xl font-bold ml-6 mt-3">Add a New Job Offer : </h1>
 
-        <form action="{{ route('offer.create') }}" method="POST" class="w-[50%] m-auto flex flex-col gap-2"
+        <form action="{{ route('offer.create') }}" method="POST" class="mt-3 w-[50%] m-auto flex flex-col gap-2"
             enctype="multipart/form-data">
             @csrf
 

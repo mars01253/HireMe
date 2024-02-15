@@ -31,24 +31,33 @@
             </div>
             <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between items-center">
-					@auth
-                    @if (auth()->user()->role == 'Candidate')
-                        <li class="md:px-4 md:py-2 text-indigo-500"><a href="{{route('profile.candidate')}}">Profile</a></li>
-						<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{route('job.offers')}}">Job Offers</a></li>
-                    @endif
+                    @auth
+                        @if (auth()->user()->role == 'Candidate')
+                            <li class="md:px-4 md:py-2 text-indigo-500"><a
+                                    href="{{ route('profile.candidate') }}">Profile</a></li>
+                            <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{ route('job.offers') }}">Job
+                                    Offers</a></li>
+                            <li class="md:px-4 md:py-2 hover:text-indigo-400">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" class="p-2 text-white bg-[#3465f8] rounded-lg hover:text-black"
+                                        value="Logout">
+                                </form>
+                            </li>
+                        @endif
                         @if (auth()->user()->role == 'Enterprise')
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a
-                                    href="{{route('enterprise.home')}}">Home</a></li>
+                                    href="{{ route('enterprise.home') }}">Home</a></li>
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a
                                     href="{{ route('profile.enterprise') }}">Profile</a></li>
+                            <li class="md:px-4 md:py-2 hover:text-indigo-400">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" class="p-2 text-white bg-[#3465f8] rounded-lg hover:text-black"
+                                        value="Logout">
+                                </form>
+                            </li>
                         @endif
-                        <li class="md:px-4 md:py-2 hover:text-indigo-400">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <input type="submit" class="p-2 text-white bg-[#3465f8] rounded-lg hover:text-black"
-                                    value="Logout">
-                            </form>
-                        </li>
                     @else
                         <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{ route('login') }}">Login</a></li>
                         <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{ route('register') }}">Register</a>

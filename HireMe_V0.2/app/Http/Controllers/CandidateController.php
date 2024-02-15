@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candidate;
-use App\Models\Cursus;
 use App\Models\Cv;
-use App\Models\Experience;
-use App\Models\Language;
 use App\Models\User;
+use App\Models\Cursus;
+use App\Models\Language;
+use App\Models\Candidate;
+use App\Models\Experience;
 use Illuminate\Http\Request;
+use Spatie\Newsletter\Facades\Newsletter;
+
+use function PHPUnit\Framework\countOf;
 
 class CandidateController extends Controller
 {
     public function index(){
         $id = auth()->user()->id;
         $data = Candidate::where('user_id' , $id)->get();
-        if($data){
+        if(count($data)>0){
             $cv = Cv::where('candidate_id' , $data[0]->id)->first();
             return view('candidate' , ['data'=>$data , 'cv'=>$cv]);
+        }else{
+
+            return view('candidate');
         }
-        return view('candidate');
     }
+    public function subscribe(Request $request)
+    {  
+        if(!Newsletter::isSubscribed($request->email)){
+         Newsletter::subscribe($request->email);
+     }
+     return redirect()->back();
+    }
+
     public function DeleteCv(Request $request){
         $id = $request->cv_id;
         $cv = Cv::where('id' , $id)->first();
@@ -125,6 +138,6 @@ class CandidateController extends Controller
     // }
     $token = 1 ;
        $this->update_Cv_token($token);
-       return to_route('cv');
+       return to_route('profile.candidate');
     }
 }

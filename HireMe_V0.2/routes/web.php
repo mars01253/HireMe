@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\CvController;
-use App\Http\Controllers\EnterpriseController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OfferController;
-use App\Http\Controllers\ProfileController;
 use App\Models\Cv;
 use App\Models\Offer;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CvController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\EnterpriseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,11 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('candidate/jobOffers' , [OfferController::class , 'JobOffers'])->name('job.offers');
     Route::get('candidate/jobOffer/{id}' , [OfferController::class , 'JobOffer'])->name('job.offer');
     Route::post('/offer/apply' , [OfferController::class , 'StoreApplication'])->name('store.application');
+
+    Route::post('/subscribe', [CandidateController::class , 'subscribe'])->name('subscribe');
+});
+Route::middleware( 'auth' , 'ADMIN')->group(function () {
+    Route::get('profile/Admin' , [AdminController::class , 'index'])->name('profile.admin');
 });
 
 

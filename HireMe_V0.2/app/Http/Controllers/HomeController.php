@@ -12,7 +12,7 @@ class HomeController extends Controller
         if(Auth::id()) {
             $role = auth()->user()->role;
             if($role=='ADMIN'){
-                return view('admin');
+                return to_route('profile.admin');
             }elseif($role=='Candidate'){
                 return to_route('profile.candidate');
             }elseif ($role=='Enterprise') {
