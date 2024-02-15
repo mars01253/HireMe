@@ -63,6 +63,8 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
 });
 Route::middleware( 'auth' , 'ADMIN')->group(function () {
     Route::get('profile/Admin' , [AdminController::class , 'index'])->name('profile.admin');
+    Route::get('profile/Admin/Stats' , [AdminController::class , 'stats'])->name('stats.admin');
+    
 });
 
 

@@ -15,4 +15,10 @@ class AdminController extends Controller
         $offers = Offer::get();
         return view('admin' , ['users'=>$users , 'offers'=>$offers]);
     }
+    public function stats(){
+        $companies = Enterprise::count();
+        $candidates = Candidate::count();
+        $offers = Offer::count();
+        return view('stats' , ['companies'=>$companies , 'candidates'=>$candidates , 'offers'=>$offers]);
+    }
 }
