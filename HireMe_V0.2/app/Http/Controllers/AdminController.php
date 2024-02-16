@@ -21,4 +21,15 @@ class AdminController extends Controller
         $offers = Offer::count();
         return view('stats' , ['companies'=>$companies , 'candidates'=>$candidates , 'offers'=>$offers]);
     }
+    public function destroy(Request $request){
+        $id = $request->id ; 
+        $user = User::find($id);
+        if($user){
+            $user->softDeletes();
+        }else{
+            $offer = Offer::find($id);
+            $offer->softDeletes();
+        }
+        return $this->index();
+    }
 }

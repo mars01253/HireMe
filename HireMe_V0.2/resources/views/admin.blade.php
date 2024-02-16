@@ -168,7 +168,12 @@
                                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$user->email}}</td>
                                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$user->role}}</td>
                                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Archive<span class="sr-only">{{$user->name}}</span></a>
+                                    <form action="{{route('destroy.admin')}}" method="POST">
+                                      @csrf
+                                      @method('DELETE')
+                                      <input type="text" class="hidden" name="id" value="{{$user->id}}">
+                                      <button type="submit">archive</button>
+                                    </form>
                                   </td>
                                 </tr>
                                 @endforeach
@@ -203,7 +208,12 @@
                                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$offer->Contract}}</td>
                                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$offer->Location}}</td>
                                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Archive<span class="sr-only">{{$offer->enterprise->name}}</span></a>
+                                    <form action="{{route('destroy.admin')}}" method="POST">
+                                      @csrf
+                                      @method('DELETE')
+                                      <input type="text" class="hidden" value="{{$offer->id}}">
+                                      <button type="submit">archive</button>
+                                    </form>
                                   </td>
                                 </tr>
                                 @endforeach
