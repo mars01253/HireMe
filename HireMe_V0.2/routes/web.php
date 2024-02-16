@@ -11,6 +11,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\EnterpriseController;
+use App\Models\Candidate;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::get('/home'  , [HomeController::class , 'reroute'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -58,8 +60,8 @@ Route::middleware( 'auth' , 'Candidate')->group(function () {
     Route::get('candidate/jobOffers' , [OfferController::class , 'JobOffers'])->name('job.offers');
     Route::get('candidate/jobOffer/{id}' , [OfferController::class , 'JobOffer'])->name('job.offer');
     Route::post('/offer/apply' , [OfferController::class , 'StoreApplication'])->name('store.application');
-
     Route::post('/subscribe', [CandidateController::class , 'subscribe'])->name('subscribe');
+    Route::post('user/search' , [HomeController::class , 'Search'])->name('user.search');
 });
 Route::middleware( 'auth' , 'ADMIN')->group(function () {
     Route::get('profile/Admin' , [AdminController::class , 'index'])->name('profile.admin');

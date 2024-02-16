@@ -25,10 +25,10 @@ class AdminController extends Controller
         $id = $request->id ; 
         $user = User::find($id);
         if($user){
-            $user->softDeletes();
+            $user->Delete();
         }else{
             $offer = Offer::find($id);
-            $offer->softDeletes();
+            $offer->Delete();
         }
         return $this->index();
     }

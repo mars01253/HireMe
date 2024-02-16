@@ -23,16 +23,23 @@
     <nav class="bg-[#eeeeee] shadow shadow-gray-300 w-100 px-8 md:px-auto">
         <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
             <!-- Logo -->
-            <div class="text-indigo-500 md:order-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width='30' viewBox="0 0 512 512">
-                    <path
-                        d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
-                </svg>
+            <div class="text-indigo-500 md:order-1 font-bold text-2xl">
+                HireMe
             </div>
             <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
                 <ul class="flex font-semibold justify-between items-center">
                     @auth
                         @if (auth()->user()->role == 'Candidate')
+                            <li class="md:px-4 md:py-2 text-indigo-500">
+                                <form action="{{ route('user.search') }}" method="POST">
+                                    @csrf
+                                    <input type="text" name="search"
+                                        class="w-full max-w-[160px] bg-white pl-2 py-2 rounded-lg text-base font-semibold outline-0"
+                                        placeholder="Search for Job offers and Companies" id="">
+                                    <input type="button" value="Search"
+                                        class="bg-blue-500 p-2 rounded-tr-lg rounded-br-lg text-white font-semibold hover:bg-blue-800 transition-colors">
+                                </form>
+                            </li>
                             <li class="md:px-4 md:py-2 text-indigo-500"><a
                                     href="{{ route('profile.candidate') }}">Profile</a></li>
                             <li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="{{ route('job.offers') }}">Job
